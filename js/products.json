@@ -2,8 +2,8 @@
   "products": [
     {
       "id": 1,
-      "name": "product1",
-      "description": "Ergonomic wireless mouse with USB receiver",
+      "name": "Product1",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "cross_price": 25.99,
       "price": 25.99,
       "currency": "USD",
@@ -14,12 +14,15 @@
       "season": true,
       "images": [
         "../images/product-1.png",
+        "../images/product-1.png",
+        "../images/product-1.png",
+        "../images/product-1.png",
         "../images/product-1.png"
       ]
     },
     {
       "id": 2,
-      "name": "product2",
+      "name": "Product2",
       "description": "Noise-cancelling over-ear Bluetooth headphones",
       "cross_price": 25.99,
       "price": 189.99,
@@ -36,7 +39,7 @@
     },
     {
       "id": 3,
-      "name": "product3",
+      "name": "Product3",
       "description": "Insulated bottle keeps drinks cold for 24 hours",
       "cross_price": 25.99,
       "price": 19.95,
@@ -53,7 +56,7 @@
     },
     {
       "id": 4,
-      "name": "product4",
+      "name": "Product4",
       "description": "Non-slip yoga mat with carrying strap",
       "cross_price": 25.99,
       "price": 35.00,
@@ -70,7 +73,7 @@
     },
     {
       "id": 5,
-      "name": "product5",
+      "name": "Product5",
       "description": "Non-slip yoga mat with carrying strap",
       "cross_price": 25.99,
       "price": 35.00,
@@ -87,7 +90,7 @@
     },
     {
       "id": 6,
-      "name": "product6",
+      "name": "Product6",
       "description": "Non-slip yoga mat with carrying strap",
       "cross_price": 25.99,
       "price": 35.00,

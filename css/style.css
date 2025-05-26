@@ -690,3 +690,13 @@ footer .bottom-text a {
   border: none;
   width: 100%;
 }
+
+/* Shop Page */
+.product_container .slider-nav img {
+  cursor: pointer;
+  border: 2px solid transparent;
+  margin-right: 5px;
+}
+.product_container .slider-nav .slick-current img {
+  border-color: #000;
+}
