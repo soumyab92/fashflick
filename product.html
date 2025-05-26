@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Product Page</title>
+  <style>
+    .cart-badge {
+      background: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 8px;
+      font-size: 14px;
+      vertical-align: super;
+      margin-left: 5px;
+    }
+    header {
+      padding: 10px;
+      background-color: #eee;
+      display: flex;
+      justify-content: flex-end;
+      font-weight: bold;
+    }
+    .product_box {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      text-align: center;
+    }
+    .product_box img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  Cart <span class="cart-badge">0</span>
+</header>
+
+<div id="productDetails">
+  <!-- Product details will load here by JS -->
+</div>
+
+<script src="js/productMain.js"></script>
+
+</body>
+</html>

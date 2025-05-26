@@ -1,0 +1,106 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "product1",
+      "description": "Ergonomic wireless mouse with USB receiver",
+      "cross_price": 25.99,
+      "price": 25.99,
+      "currency": "USD",
+      "category": "Sports Wear",
+      "category_img": "../images/cat-1.png",
+      "inStock": true,
+      "trending": false,
+      "season": false,
+      "images": [
+        "../images/product-1.png",
+        "../images/product-1.png"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "product2",
+      "description": "Noise-cancelling over-ear Bluetooth headphones",
+      "cross_price": 25.99,
+      "price": 89.99,
+      "currency": "USD",
+      "category": "Top Wear",
+      "category_img": "../images/cat-2.png",
+      "inStock": true,
+      "trending": false,
+      "season": false,
+      "images": [
+        "../images/product-2.png",
+        "../images/product-2.png"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "product3",
+      "description": "Insulated bottle keeps drinks cold for 24 hours",
+      "cross_price": 25.99,
+      "price": 19.95,
+      "currency": "USD",
+      "category": "Foot wear",
+      "category_img": "../images/cat-3.png",
+      "inStock": true,
+      "trending": true,
+      "season": true,
+      "images": [
+        "../images/product-3.png",
+        "../images/product-3.png"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "product4",
+      "description": "Non-slip yoga mat with carrying strap",
+      "cross_price": 25.99,
+      "price": 35.00,
+      "currency": "USD",
+      "category": "Inner/Sleep",
+      "category_img": "../images/cat-4.png",
+      "inStock": false,
+      "trending": true,
+      "season": false,
+      "images": [
+        "../images/product-4.png",
+        "../images/product-4.png"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "product5",
+      "description": "Non-slip yoga mat with carrying strap",
+      "cross_price": 25.99,
+      "price": 35.00,
+      "currency": "USD",
+      "category": "Mini Dresses",
+      "category_img": "../images/cat-5.png",
+      "inStock": false,
+      "trending": true,
+      "season": true,
+      "images": [
+        "../images/product-4.png",
+        "../images/product-4.png"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "product6",
+      "description": "Non-slip yoga mat with carrying strap",
+      "cross_price": 25.99,
+      "price": 35.00,
+      "currency": "USD",
+      "category": "Dresses",
+      "category_img": "../images/cat-6.png",
+      "inStock": false,
+      "trending": true,
+      "season": true,
+      "images": [
+        "../images/product-4.png",
+        "../images/product-4.png"
+      ]
+    }
+  ]
+}
