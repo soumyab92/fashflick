@@ -72,7 +72,7 @@ fetch('./js/products.json')
       </ul>
 
       <div class="secure-icons">
-        <strong>Secure Checkout</strong>
+        <strong>Secure Checkout</strong><br>
         <img src="images/secure_payments 1.png" class="img-fluid">
       </div>
     `;
