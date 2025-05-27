@@ -90,3 +90,67 @@ function attachClearCartHandler() {
 
 // Initial render
 renderCart();
+
+function attachCheckoutHandler(total) {
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+      // Collect required fields
+      const requiredFields = [
+        { id: 'firstName', name: 'First Name' },
+        { id: 'lastName', name: 'Last Name' },
+        { id: 'phone', name: 'Phone' },
+        { id: 'email', name: 'Email' },
+        { id: 'address', name: 'Address' },
+        { id: 'city', name: 'City' },
+        { id: 'state', name: 'State' },
+        { id: 'postalCode', name: 'Postal Code' }
+      ];
+
+      let isValid = true;
+      let missingFields = [];
+
+      requiredFields.forEach(field => {
+        const input = document.getElementById(field.id);
+        if (!input || !input.value.trim()) {
+          isValid = false;
+          missingFields.push(field.name);
+          input?.classList.add('input-error');
+        } else {
+          input.classList.remove('input-error');
+        }
+      });
+
+      if (!isValid) {
+        alert(`Please fill the following required fields:\n- ${missingFields.join('\n- ')}`);
+        return;
+      }
+
+      // If valid, proceed with storing data
+      const orderInfo = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        address: document.getElementById('address').value,
+        apartment: document.getElementById('apartment').value,
+        city: document.getElementById('city').value,
+        state: document.getElementById('state').value,
+        postalCode: document.getElementById('postalCode').value,
+        cart: cart,
+        total: total.toFixed(2),
+        date: new Date().toLocaleString()
+      };
+
+      localStorage.setItem('orderDetails', JSON.stringify(orderInfo));
+      window.location.href = 'thankyou.html';
+    });
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+    const phoneInput = document.getElementById('phone');
+
+    phoneInput.addEventListener('input', () => {
+      phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '');
+    });
+  });

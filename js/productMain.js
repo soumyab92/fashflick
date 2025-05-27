@@ -149,4 +149,34 @@ fetch('./js/products.json')
       updateCartBadge();
       window.location.href = 'cart.html';
     });
+
+    // RELATED PRODUCTS: Filter and display
+    const relatedProducts = data.products.filter(p => p.category === product.category && p.id !== product.id);
+
+    const relatedContainer = document.querySelector('.related_pro');
+    if (relatedContainer) {
+      if (relatedProducts.length === 0) {
+        relatedContainer.innerHTML = '<p>No related products found.</p>';
+      } else {
+        relatedContainer.innerHTML = relatedProducts.map(p => `
+      <div class="pro_main_box">
+        <div class="img-box">
+          <img src="${p.images[0]}" class="img-fluid" alt="Product">
+          <a href="product.html?id=${p.id}" class="common-btn">BUY NOW</a>
+        </div>
+        <div class="content_box">
+          <h3>${p.name}</h3>
+          <div class="price_box">
+            <p>$${p.cross_price} <span>$${p.price}</span></p>
+            <div>
+              <span>4.5</span>
+              <img src="images/star.svg" class="img-fluid" alt="star">
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+      }
+    }
+
   });
