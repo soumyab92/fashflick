@@ -32,7 +32,7 @@ fetch('./js/products.json')
           <div class="content_box">
             <h3>${product.name}</h3>
             <div class="price_box">
-              <p>$${product.cross_price} <span>${product.price}</span></p>
+              <p><s>$${product.cross_price}</s><span>$${product.price}</span></p>
               <div>
                 <span>4.5</span>
                 <img src="images/star.svg" class="img-fluid" alt="star">
@@ -61,7 +61,7 @@ fetch('./js/products.json')
           <div class="content_box">
             <h3>${product.name}</h3>
             <div class="price_box">
-              <p>$${product.cross_price} <span>${product.price}</span></p>
+              <p><s>$${product.cross_price}</s><span>$${product.price}</span></p>
               <div>
                 <span>4.5</span>
                 <img src="images/star.svg" class="img-fluid" alt="star">

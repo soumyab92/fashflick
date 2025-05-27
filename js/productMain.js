@@ -35,44 +35,44 @@ fetch('./js/products.json')
       </div>
       <h3>${product.name}</h3>
       <p class="product-price">
-        <span class="old-price">$${product.cross_price}</span> 
+        <span class="old-price"><s>$${product.cross_price}</s></span> 
         $${product.price} 
-        <span class="badge bg-danger">55% OFF</span>
+        <span class="badge">55% OFF</span>
       </p>
-      <p>${product.description}</p>
+      <p class="pro_short_des">${product.description}</p>
 
       <!-- Size -->
       <div class="filter_with_size">
-        <h3>Size:</h3> 
-        <ul><li>S</li></ul>
+        <h4>Size:</h4> 
+        <ul class="filter"><li>S</li></ul>
       </div>
 
       <!-- Color -->
       <div class="filter_with_color">
-        <h3>Color:</h3> 
-        <ul><li class="purple"></li></ul>
+        <h4>Color:</h4> 
+        <ul class="filter"><li class="purple"></li></ul>
       </div>
 
       <!-- Quantity -->
-      <div class="input-group mb-3" style="width: 130px;">
-        <button class="btn btn-outline-secondary" type="button" id="qtyMinus">−</button>
-        <input type="text" id="qtyInput" class="form-control text-center" value="1">
-        <button class="btn btn-outline-secondary" type="button" id="qtyPlus">+</button>
+      <div class="quantity-box">
+        <button class="minus" type="button" id="qtyMinus">−</button>
+        <input type="text" id="qtyInput" class="valu" value="1">
+        <button class="plus" type="button" id="qtyPlus">+</button>
       </div>
 
       <!-- Buttons -->
-      <div class="d-flex mb-3">
+      <div class="pro_btn">
         <a href="javascript:void(0);" class="common-btn" id="addToCartBtn">Add To Cart</a>
         <a href="javascript:void(0);" class="common-btn" id="buyNowBtn">BUY NOW</a>
       </div>
 
-      <ul class="list-unstyled mb-3">
+      <ul class="list-unstyled more_detail">
         <li><strong>Sku:</strong> SKU_45</li>
         <li><strong>Available:</strong> 2</li>
       </ul>
 
       <div class="secure-icons">
-        <strong>Secure Checkout</strong><br>
+        <strong>Secure Checkout</strong>
         <img src="images/secure_payments 1.png" class="img-fluid">
       </div>
     `;
@@ -132,7 +132,7 @@ fetch('./js/products.json')
       }
       localStorage.setItem('cart', JSON.stringify(cart));
       updateCartBadge();
-      alert('Product added to cart!');
+      // alert('Product added to cart!');
     });
 
     // Buy Now functionality
