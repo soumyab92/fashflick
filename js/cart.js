@@ -20,24 +20,28 @@ function renderCart() {
     total += subtotal;
 
     html += `
-      <div class="cart_item" style="margin-bottom: 20px;">
+      <div class="cart_item">
         <img src="${product.images[0]}" alt="${product.name}" style="width: 100px;">
-        <h4>${product.name}</h4>
-        <p>Price: $${product.price}</p>
-        <label>
-          Quantity:
-          <input type="number" min="1" data-index="${index}" class="quantity-input" value="${product.quantity}" style="width: 60px;">
-        </label>
-        <p>Subtotal: $${subtotal.toFixed(2)}</p>
+        <div class="quantity_box">
+          <h4>${product.name}</h4>
+          <div class="quantity-control" data-index="${index}">
+            <button class="btn-decrease">−</button>
+            <input type="text" class="quantity-input" value="${product.quantity}" readonly>
+            <button class="btn-increase">+</button>
+          </div>
+        </div>
+        <p>$${product.price}</p>
       </div>
     `;
   });
 
   cartDiv.innerHTML = html;
   totalDiv.innerHTML = `
-    <h3>Total: $${total.toFixed(2)}</h3>
-    <button id="checkoutBtn" class="common-btn" style="margin-top: 10px;">Checkout</button>
-    <button id="clearCartBtn" class="common-btn" style="margin-top: 10px; margin-left: 10px; background-color: #e74c3c;">Clear Cart</button>
+    <h3>Subtotal: <span>$${total.toFixed(2)}</span></h3>
+    <div class="check_btn_grp">
+      <button id="checkoutBtn" class="common-btn">Checkout</button>
+      <button id="clearCartBtn" class="common-btn">Clear Cart</button>
+    </div>
   `;
 
   attachQuantityListeners();
@@ -45,57 +49,35 @@ function renderCart() {
   attachClearCartHandler();
 }
 
-// Handle quantity updates
+// Quantity plus-minus logic
 function attachQuantityListeners() {
-  document.querySelectorAll('.quantity-input').forEach(input => {
-    input.addEventListener('change', (e) => {
-      const index = e.target.dataset.index;
-      const newQty = parseInt(e.target.value);
+  document.querySelectorAll('.quantity-control').forEach(control => {
+    const index = control.dataset.index;
+    const input = control.querySelector('.quantity-input');
+    const decreaseBtn = control.querySelector('.btn-decrease');
+    const increaseBtn = control.querySelector('.btn-increase');
 
-      if (newQty >= 1) {
-        cart[index].quantity = newQty;
+    decreaseBtn.addEventListener('click', () => {
+      if (cart[index].quantity > 1) {
+        cart[index].quantity--;
         localStorage.setItem('cart', JSON.stringify(cart));
-        renderCart(); // Re-render on update
+        renderCart();
       }
+    });
+
+    increaseBtn.addEventListener('click', () => {
+      cart[index].quantity++;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
     });
   });
 }
 
-// Handle checkout
+// Checkout validation and storage
 function attachCheckoutHandler(total) {
   const checkoutBtn = document.getElementById('checkoutBtn');
   if (checkoutBtn) {
     checkoutBtn.addEventListener('click', () => {
-      localStorage.setItem('orderDetails', JSON.stringify({
-        cart: cart,
-        total: total.toFixed(2),
-        date: new Date().toLocaleString()
-      }));
-      window.location.href = 'thankyou.html';
-    });
-  }
-}
-
-// Handle clear cart
-function attachClearCartHandler() {
-  const clearCartBtn = document.getElementById('clearCartBtn');
-  if (clearCartBtn) {
-    clearCartBtn.addEventListener('click', () => {
-      cart = [];
-      localStorage.removeItem('cart');
-      renderCart();
-    });
-  }
-}
-
-// Initial render
-renderCart();
-
-function attachCheckoutHandler(total) {
-  const checkoutBtn = document.getElementById('checkoutBtn');
-  if (checkoutBtn) {
-    checkoutBtn.addEventListener('click', () => {
-      // Collect required fields
       const requiredFields = [
         { id: 'firstName', name: 'First Name' },
         { id: 'lastName', name: 'Last Name' },
@@ -126,7 +108,6 @@ function attachCheckoutHandler(total) {
         return;
       }
 
-      // If valid, proceed with storing data
       const orderInfo = {
         firstName: document.getElementById('firstName').value,
         lastName: document.getElementById('lastName').value,
@@ -147,10 +128,40 @@ function attachCheckoutHandler(total) {
     });
   }
 }
-document.addEventListener('DOMContentLoaded', () => {
-    const phoneInput = document.getElementById('phone');
 
+// Clear cart
+function attachClearCartHandler() {
+  const clearCartBtn = document.getElementById('clearCartBtn');
+  if (clearCartBtn) {
+    clearCartBtn.addEventListener('click', () => {
+      cart = [];
+      localStorage.removeItem('cart');
+      renderCart();
+    });
+  }
+}
+
+// Prevent alphabets in phone input
+document.addEventListener('DOMContentLoaded', () => {
+  const phoneInput = document.getElementById('phone');
+  if (phoneInput) {
     phoneInput.addEventListener('input', () => {
       phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '');
     });
+  }
+});
+
+// Initial render
+renderCart();
+
+// Update all cart badges on page
+function updateAllCartBadges() {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+  document.querySelectorAll('.cart-badge').forEach(badge => {
+    badge.textContent = totalQuantity;
   });
+}
+
+// Call badge update on page load
+updateAllCartBadges();
