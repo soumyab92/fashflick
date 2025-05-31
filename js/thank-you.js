@@ -18,12 +18,12 @@ if (!order || !order.cart || order.cart.length === 0) {
               <h4>${item.name}</h4>
               <p>Quantity: ${item.quantity}</p>
             </div>
-            <p>Subtotal: $${subtotal.toFixed(2)}</p>
+            <p class="tt-price">$${subtotal.toFixed(2)}</p>
           </div>
         `;
     });
 
-    html += `<h3>Total Paid: <span>$${total.toFixed(2)}</span></h3>`;
+    html += `<h3>Subtotal: <span>$${total.toFixed(2)}</span></h3>`;
     summaryDiv.innerHTML = html;
 
     // Optional: Clear cart after successful checkout

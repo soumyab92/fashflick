@@ -32,24 +32,20 @@
                 <img src="images/logo.png" srcset="images/logo@2x.png 2x, images/logo@3x.png 3x" alt="Fashflick Logo" />
             </a>
 
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a href="cart.html" class="icon-btn position-relative d-block d-md-none">
+            <a href="cart.html" class="icon-btn position-relative d-block ms-auto d-md-none">
                 <img src="images/cart-Icon.svg" alt="user-Icon">
                 <span class="cart-badge">0</span>
             </a>
+            <button class="navbar-toggler ms-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
-                    <div class="d-flex align-items-center d-block d-md-none">
-                        <a class="icon-btn"><img src="images/search.svg" alt="search"></a>
-                        <a class="icon-btn"><img src="images/user-Icon.svg" alt="user-Icon"></a>
-                    </div>
+                    <li class="nav-item"><a class="nav-link" href="javascript:void(0);">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="javascript:void(0);">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="javascript:void(0);">Contact Us</a></li>
                 </ul>
             </div>
             <div class="d-flex align-items-center d-none d-md-block">
@@ -62,6 +58,7 @@
             </div>
         </div>
     </nav>
+
 
     <section class="breadcrumb-sec">
         <div class="container">
@@ -84,14 +81,18 @@
     <div class="shop_list">
         <div class="container">
             <div class="row">
-
-                <div class="col-12 text-end mb-4">
+                <div class="col-6 d-block d-md-none">
+                    <img src="images/filter.png" class="filter_btn" alt="filter" width="30">
+                </div>
+                <div class="col-6 col-md-12 text-end mb-4">
                     <select id="sortSelect" class="p-2">
                         <option value="default">Sort By</option>
                         <option value="asc">Price: Low to High</option>
                         <option value="desc">Price: High to Low</option>
                     </select>
                 </div>
+            </div>
+            <div class="row">
 
                 <!-- Sidebar Filters -->
                 <div class="col-md-3 mb-4">
@@ -135,6 +136,7 @@
                             <label><input type="checkbox" id="rating4"> 4★ & above</label>
                         </div>
                         <!-- Reset Button -->
+                        <button class="apply_btn d-block d-md-none mb-3">Apply</button>
                         <button class="reset_btn">Reset</button>
                     </div>
                 </div>

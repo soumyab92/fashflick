@@ -925,14 +925,14 @@ footer .bottom-text a {
   border-radius: 4px;
   margin-bottom: 25px;
 }
-
+.thnk-you-price h4,
 #cartItems .cart_item h4 {
   font-size: 18px;
   font-weight: 600;
   color: #000;
   margin-bottom: 15px;
 }
-
+.thnk-you-price p,
 #cartItems .cart_item p {
   font-size: 22px;
   font-family: "Poppins", sans-serif;
@@ -946,7 +946,7 @@ footer .bottom-text a {
 #cartItems .quantity_box {
   width: 60%;
 }
-
+#orderSummary .tt-price,
 #orderSummary h3,
 #total h3 {
   font-size: 18px;
@@ -967,9 +967,125 @@ footer .bottom-text a {
   justify-content: flex-end;
   column-gap: 25px;
 }
+
 #orderSummary {
   margin-top: 25px;
 }
+
 .thank-you-sec {
   padding: 60px 0;
+}
+.thank-you-sec h1 {
+  font-size: 35px;
+  font-weight: 600;
+  color: #000;
+  margin: 15px 0;
+}
+
+.thank-you-sec p {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+@media(max-width:767px) {
+  .thnk-you-price h4 {
+    font-size: 18px;
+  }
+  #carouselExampleFade .carousel-item img {
+    height: 470px;
+    object-fit: cover;
+    object-position: right;
+  }
+
+  .carousel-caption {
+    left: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    text-align: center;
+  }
+
+  .carousel-caption h1 {
+    font-size: 26px;
+    line-height: 32px;
+  }
+
+  .carousel-caption h1 span {
+    font-size: 26px;
+  }
+
+  .carousel-caption p {
+    margin-bottom: 20px;
+  }
+
+  .service_highlights .content_box {
+    flex-flow: column;
+  }
+
+  .service_highlights .content_box .content {
+    text-align: center;
+    margin: 15px 0;
+  }
+
+  .com_title {
+    font-size: 26px;
+    margin-bottom: 10px;
+  }
+
+  .common-btn {
+    padding: 10px 25px;
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .offer_zone .img_box .content_box h3 {
+    font-size: 24px;
+  }
+
+  .offer_zone .img_box .content_box p {
+    font-size: 20px;
+  }
+
+  .trending_sec .slick-prev,
+  .trending_sec .slick-next {
+    top: -65px;
+  }
+
+  .review_sec {
+    padding-bottom: 40px;
+  }
+
+  .p_60 {
+    padding-top: 40px;
+  }
+
+  .filter_sec {
+    display: none;
+    transition: 0.5s ease-in-out;
+  }
+
+  .filter_sec.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: 9;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  .pro_main_box .content_box .price_box p {
+        font-size: 16px;
+  }
+  .pro_main_box .content_box .price_box p span {
+    margin-left: 10px;
+  }
+  #productDetails .icon img {
+    max-width: 65px;
+}
+#productDetails .rev_box span {
+  font-size: 14px;
+}
 }

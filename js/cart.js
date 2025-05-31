@@ -49,6 +49,8 @@ function renderCart() {
   attachClearCartHandler();
 }
 
+  attachCheckoutHandler(total);
+  attachClearCartHandler();
 // Quantity plus-minus logic
 function attachQuantityListeners() {
   document.querySelectorAll('.quantity-control').forEach(control => {

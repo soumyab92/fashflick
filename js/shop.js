@@ -28,7 +28,7 @@ fetch('./js/products.json')
 // Render products to the page
 function renderProducts(products) {
   const allProductDiv = products.map(product => `
-    <div class="col-md-4 mb-5">
+    <div class="col-6 col-md-4 mb-5">
       <div class="pro_main_box">
         <div class="img-box">
           <img src="${product.images[0]}" class="img-fluid" alt="Product">
@@ -91,10 +91,11 @@ function setupEventListeners() {
     document.querySelectorAll('#categoryFilters input[type="checkbox"]').forEach(cb => cb.checked = false);
     document.querySelectorAll('.price_filter input[type="checkbox"]').forEach(cb => cb.checked = false);
     document.querySelectorAll('.avl_filter input[type="checkbox"]').forEach(cb => cb.checked = false);
+    document.querySelector('.filter_sec').classList.remove('active');
 
     // Reset sort
-    document.getElementById('sortSelect').value = '';
-    activeSort = '';
+    // document.getElementById('sortSelect').value = '';
+    // activeSort = '';
 
     // Show all products again
     renderProducts(originalProducts);
@@ -171,3 +172,11 @@ function updateAllCartBadges() {
 
 // Call badge update on page load
 updateAllCartBadges();
+
+// Filter on mobile MObile
+document.querySelector('.filter_btn').addEventListener('click', function () {
+  document.querySelector('.filter_sec').classList.add('active');
+});
+document.querySelector('.apply_btn').addEventListener('click', function () {
+  document.querySelector('.filter_sec').classList.remove('active');
+});

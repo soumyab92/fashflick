@@ -104,6 +104,111 @@
         "../images/product-4.png",
         "../images/product-4.png"
       ]
+    },
+    {
+      "id": 7,
+      "name": "Product7",
+      "description": "Dressing up. People just don't do it anymore. We have to change that. Give me time and I'll give you a revolution. What I hate is nasty, ugly people. The... It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "cross_price": 25.99,
+      "price": 25.99,
+      "currency": "USD",
+      "category": "Sports Wear",
+      "category_img": "../images/cat-1.png",
+      "inStock": true,
+      "trending": true,
+      "season": true,
+      "images": [
+        "../images/product-1.png",
+        "../images/product-1.png",
+        "../images/product-1.png",
+        "../images/product-1.png",
+        "../images/product-1.png"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Product8",
+      "description": "Noise-cancelling over-ear Bluetooth headphones",
+      "cross_price": 25.99,
+      "price": 199.99,
+      "currency": "USD",
+      "category": "Top Wear",
+      "category_img": "../images/cat-2.png",
+      "inStock": true,
+      "trending": false,
+      "season": false,
+      "images": [
+        "../images/product-2.png",
+        "../images/product-2.png"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Product9",
+      "description": "Insulated bottle keeps drinks cold for 24 hours",
+      "cross_price": 25.99,
+      "price": 119.95,
+      "currency": "USD",
+      "category": "Foot wear",
+      "category_img": "../images/cat-3.png",
+      "inStock": true,
+      "trending": true,
+      "season": true,
+      "images": [
+        "../images/product-3.png",
+        "../images/product-3.png"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Product10",
+      "description": "Non-slip yoga mat with carrying strap",
+      "cross_price": 25.99,
+      "price": 35.00,
+      "currency": "USD",
+      "category": "Inner/Sleep",
+      "category_img": "../images/cat-4.png",
+      "inStock": false,
+      "trending": true,
+      "season": true,
+      "images": [
+        "../images/product-4.png",
+        "../images/product-4.png"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Product11",
+      "description": "Non-slip yoga mat with carrying strap",
+      "cross_price": 25.99,
+      "price": 35.00,
+      "currency": "USD",
+      "category": "Mini Dresses",
+      "category_img": "../images/cat-5.png",
+      "inStock": false,
+      "trending": true,
+      "season": true,
+      "images": [
+        "../images/product-4.png",
+        "../images/product-4.png"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Product12",
+      "description": "Non-slip yoga mat with carrying strap",
+      "cross_price": 25.99,
+      "price": 50.00,
+      "currency": "USD",
+      "category": "Dresses",
+      "category_img": "../images/cat-6.png",
+      "inStock": false,
+      "trending": true,
+      "season": true,
+      "images": [
+        "../images/product-4.png",
+        "../images/product-4.png"
+      ]
     }
   ]
 }
