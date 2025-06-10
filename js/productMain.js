@@ -122,7 +122,7 @@ fetch('./js/products.json')
 
     // Add to Cart functionality
     document.getElementById('addToCartBtn').addEventListener('click', () => {
-      alert("Product added");
+      // alert("Product added");
       const quantity = parseInt(qtyInput.value) || 1;
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
       const exists = cart.find(item => item.id === product.id);
