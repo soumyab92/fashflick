@@ -1,20 +1,24 @@
-// Get cart data from localStorage or initialize empty
+// Get cart data from localStorage or initialize an empty array
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Render cart items
+// --- RENDER CART ---
+// Renders the entire cart display, including items, total, and buttons.
 function renderCart() {
   const cartDiv = document.getElementById('cartItems');
   const totalDiv = document.getElementById('total');
 
+  // If cart is empty, show a message and clear the total section
   if (cart.length === 0) {
     cartDiv.innerHTML = '<p>Your cart is empty.</p>';
     totalDiv.innerHTML = '';
+    updateAllCartBadges(); // Ensure badges are updated to 0
     return;
   }
 
   let html = '';
   let total = 0;
 
+  // Loop through each product in the cart to build the HTML
   cart.forEach((product, index) => {
     const subtotal = product.price * product.quantity;
     total += subtotal;
@@ -30,11 +34,12 @@ function renderCart() {
             <button class="btn-increase">+</button>
           </div>
         </div>
-        <p>$${product.price}</p>
+        <p>$${product.price.toFixed(2)}</p>
       </div>
     `;
   });
 
+  // Display the generated HTML for cart items and the total section
   cartDiv.innerHTML = html;
   totalDiv.innerHTML = `
     <h3>Subtotal: <span>$${total.toFixed(2)}</span></h3>
@@ -44,38 +49,53 @@ function renderCart() {
     </div>
   `;
 
+  // Attach event listeners to the newly created buttons and controls
   attachQuantityListeners();
   attachCheckoutHandler(total);
   attachClearCartHandler();
+  
+  // Update all cart badges on the page
+  updateAllCartBadges();
 }
 
-  attachCheckoutHandler(total);
-  attachClearCartHandler();
-// Quantity plus-minus logic
+// --- ATTACH EVENT LISTENERS ---
+
+// Attaches click listeners to the quantity plus/minus buttons
 function attachQuantityListeners() {
   document.querySelectorAll('.quantity-control').forEach(control => {
-    const index = control.dataset.index;
-    const input = control.querySelector('.quantity-input');
+    const index = parseInt(control.dataset.index, 10);
     const decreaseBtn = control.querySelector('.btn-decrease');
     const increaseBtn = control.querySelector('.btn-increase');
 
+    // Decrease button logic
     decreaseBtn.addEventListener('click', () => {
-      if (cart[index].quantity > 1) {
-        cart[index].quantity--;
+      // Check if the item exists to prevent errors
+      if (cart[index]) {
+        cart[index].quantity--; // Decrease quantity by 1
+
+        // If quantity is 0 or less, remove the item from the cart
+        if (cart[index].quantity <= 0) {
+          cart.splice(index, 1); // Removes 1 item at the specified index
+        }
+        
+        // Save the updated cart and re-render the display
         localStorage.setItem('cart', JSON.stringify(cart));
         renderCart();
       }
     });
 
+    // Increase button logic
     increaseBtn.addEventListener('click', () => {
-      cart[index].quantity++;
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
+      if (cart[index]) {
+        cart[index].quantity++;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCart();
+      }
     });
   });
 }
 
-// Checkout validation and storage
+// Attaches click listener to the "Checkout" button
 function attachCheckoutHandler(total) {
   const checkoutBtn = document.getElementById('checkoutBtn');
   if (checkoutBtn) {
@@ -101,7 +121,7 @@ function attachCheckoutHandler(total) {
           missingFields.push(field.name);
           input?.classList.add('input-error');
         } else {
-          input.classList.remove('input-error');
+          input?.classList.remove('input-error');
         }
       });
 
@@ -126,21 +146,37 @@ function attachCheckoutHandler(total) {
       };
 
       localStorage.setItem('orderDetails', JSON.stringify(orderInfo));
+      // Clear the cart after successful checkout
+      localStorage.removeItem('cart'); 
       window.location.href = 'thankyou.html';
     });
   }
 }
 
-// Clear cart
+// Attaches click listener to the "Clear Cart" button
 function attachClearCartHandler() {
   const clearCartBtn = document.getElementById('clearCartBtn');
   if (clearCartBtn) {
     clearCartBtn.addEventListener('click', () => {
-      cart = [];
-      localStorage.removeItem('cart');
-      renderCart();
+      if (confirm('Are you sure you want to clear your cart?')) {
+        cart = [];
+        localStorage.removeItem('cart');
+        renderCart();
+      }
     });
   }
+}
+
+
+// --- UTILITY FUNCTIONS ---
+
+// Update all cart badges on the page
+function updateAllCartBadges() {
+  const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+  const totalQuantity = currentCart.reduce((sum, item) => sum + item.quantity, 0);
+  document.querySelectorAll('.cart-badge').forEach(badge => {
+    badge.textContent = totalQuantity;
+  });
 }
 
 // Prevent alphabets in phone input
@@ -151,19 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
       phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '');
     });
   }
+  
+  // Initial render of the cart when the page loads
+  renderCart();
 });
-
-// Initial render
-renderCart();
-
-// Update all cart badges on page
-function updateAllCartBadges() {
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
-  document.querySelectorAll('.cart-badge').forEach(badge => {
-    badge.textContent = totalQuantity;
-  });
-}
-
-// Call badge update on page load
-updateAllCartBadges();

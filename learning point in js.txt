@@ -1,0 +1,13 @@
+Promise/async
+call back function
+what is json parse
+
+dom manulation 
+
+local storage
+
+setionstorage
+
+filter
+
+forEach
