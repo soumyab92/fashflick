@@ -1,28 +1,58 @@
 // Get cart data from localStorage or initialize an empty array
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// --- RENDER CART ---
-// Renders the entire cart display, including items, total, and buttons.
+// --- RENDER CART (Updated with Redirect Logic) ---
 function renderCart() {
-  const cartDiv = document.getElementById('cartItems');
-  const totalDiv = document.getElementById('total');
+  // Find the main sections of the page to show/hide
+  const formSection = document.getElementById('firstName')?.closest('form, div.checkout-form');
+  const cartSummarySection = document.getElementById('cartItems')?.parentElement;
 
-  // If cart is empty, show a message and clear the total section
+  // --- LOGIC: Handle Empty Cart ---
   if (cart.length === 0) {
-    cartDiv.innerHTML = '<p>Your cart is empty.</p>';
-    totalDiv.innerHTML = '';
-    updateAllCartBadges(); // Ensure badges are updated to 0
-    return;
+    // 1. Hide the checkout form
+    if (formSection) {
+      formSection.style.display = 'none';
+    }
+
+    // 2. Display a message informing the user of the redirect
+    if (cartSummarySection) {
+      cartSummarySection.style.display = 'block';
+      cartSummarySection.innerHTML = `
+        <div style="text-align: center; padding: 40px 20px;">
+          <h2>Your Shopping Cart is Empty</h2>
+          <p>Redirecting you to the shop in 3 seconds...</p>
+        </div>
+      `;
+    }
+    
+    // 3. Set a timer to redirect the user after 3 seconds (3000 milliseconds)
+    setTimeout(() => {
+      // IMPORTANT: Change 'shop.html' to the correct URL of your shop page!
+      window.location.href = 'shop.html'; 
+    }, 3000);
+
+    updateAllCartBadges(); // Update badges to 0
+    return; // Stop the function here
+  }
+  
+  // --- LOGIC: Handle Non-Empty Cart (No changes here) ---
+  // If the code reaches here, the cart has items. Ensure sections are visible.
+  if (formSection) {
+    formSection.style.display = ''; // Revert to default display
+  }
+  if (cartSummarySection) {
+    cartSummarySection.style.display = '';
   }
 
+  const cartDiv = document.getElementById('cartItems');
+  const totalDiv = document.getElementById('total');
+  
   let html = '';
   let total = 0;
 
-  // Loop through each product in the cart to build the HTML
   cart.forEach((product, index) => {
     const subtotal = product.price * product.quantity;
     total += subtotal;
-
     html += `
       <div class="cart_item">
         <img src="${product.images[0]}" alt="${product.name}" style="width: 100px;">
@@ -39,7 +69,6 @@ function renderCart() {
     `;
   });
 
-  // Display the generated HTML for cart items and the total section
   cartDiv.innerHTML = html;
   totalDiv.innerHTML = `
     <h3>Subtotal: <span>$${total.toFixed(2)}</span></h3>
@@ -49,42 +78,31 @@ function renderCart() {
     </div>
   `;
 
-  // Attach event listeners to the newly created buttons and controls
   attachQuantityListeners();
   attachCheckoutHandler(total);
   attachClearCartHandler();
-  
-  // Update all cart badges on the page
   updateAllCartBadges();
 }
 
-// --- ATTACH EVENT LISTENERS ---
+// --- ALL OTHER FUNCTIONS REMAIN THE SAME ---
 
-// Attaches click listeners to the quantity plus/minus buttons
 function attachQuantityListeners() {
   document.querySelectorAll('.quantity-control').forEach(control => {
     const index = parseInt(control.dataset.index, 10);
     const decreaseBtn = control.querySelector('.btn-decrease');
     const increaseBtn = control.querySelector('.btn-increase');
 
-    // Decrease button logic
     decreaseBtn.addEventListener('click', () => {
-      // Check if the item exists to prevent errors
       if (cart[index]) {
-        cart[index].quantity--; // Decrease quantity by 1
-
-        // If quantity is 0 or less, remove the item from the cart
+        cart[index].quantity--;
         if (cart[index].quantity <= 0) {
-          cart.splice(index, 1); // Removes 1 item at the specified index
+          cart.splice(index, 1);
         }
-        
-        // Save the updated cart and re-render the display
         localStorage.setItem('cart', JSON.stringify(cart));
         renderCart();
       }
     });
 
-    // Increase button logic
     increaseBtn.addEventListener('click', () => {
       if (cart[index]) {
         cart[index].quantity++;
@@ -95,25 +113,17 @@ function attachQuantityListeners() {
   });
 }
 
-// Attaches click listener to the "Checkout" button
 function attachCheckoutHandler(total) {
   const checkoutBtn = document.getElementById('checkoutBtn');
   if (checkoutBtn) {
     checkoutBtn.addEventListener('click', () => {
       const requiredFields = [
-        { id: 'firstName', name: 'First Name' },
-        { id: 'lastName', name: 'Last Name' },
-        { id: 'phone', name: 'Phone' },
-        { id: 'email', name: 'Email' },
-        { id: 'address', name: 'Address' },
-        { id: 'city', name: 'City' },
-        { id: 'state', name: 'State' },
-        { id: 'postalCode', name: 'Postal Code' }
+        { id: 'firstName', name: 'First Name' }, { id: 'lastName', name: 'Last Name' },
+        { id: 'phone', name: 'Phone' }, { id: 'email', name: 'Email' },
+        { id: 'address', name: 'Address' }, { id: 'city', name: 'City' },
+        { id: 'state', name: 'State' }, { id: 'postalCode', name: 'Postal Code' }
       ];
-
-      let isValid = true;
-      let missingFields = [];
-
+      let isValid = true, missingFields = [];
       requiredFields.forEach(field => {
         const input = document.getElementById(field.id);
         if (!input || !input.value.trim()) {
@@ -124,12 +134,10 @@ function attachCheckoutHandler(total) {
           input?.classList.remove('input-error');
         }
       });
-
       if (!isValid) {
         alert(`Please fill the following required fields:\n- ${missingFields.join('\n- ')}`);
         return;
       }
-
       const orderInfo = {
         firstName: document.getElementById('firstName').value,
         lastName: document.getElementById('lastName').value,
@@ -144,16 +152,13 @@ function attachCheckoutHandler(total) {
         total: total.toFixed(2),
         date: new Date().toLocaleString()
       };
-
       localStorage.setItem('orderDetails', JSON.stringify(orderInfo));
-      // Clear the cart after successful checkout
-      localStorage.removeItem('cart'); 
+      localStorage.removeItem('cart');
       window.location.href = 'thankyou.html';
     });
   }
 }
 
-// Attaches click listener to the "Clear Cart" button
 function attachClearCartHandler() {
   const clearCartBtn = document.getElementById('clearCartBtn');
   if (clearCartBtn) {
@@ -167,10 +172,6 @@ function attachClearCartHandler() {
   }
 }
 
-
-// --- UTILITY FUNCTIONS ---
-
-// Update all cart badges on the page
 function updateAllCartBadges() {
   const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
   const totalQuantity = currentCart.reduce((sum, item) => sum + item.quantity, 0);
@@ -179,7 +180,6 @@ function updateAllCartBadges() {
   });
 }
 
-// Prevent alphabets in phone input
 document.addEventListener('DOMContentLoaded', () => {
   const phoneInput = document.getElementById('phone');
   if (phoneInput) {
@@ -187,7 +187,5 @@ document.addEventListener('DOMContentLoaded', () => {
       phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '');
     });
   }
-  
-  // Initial render of the cart when the page loads
   renderCart();
 });
